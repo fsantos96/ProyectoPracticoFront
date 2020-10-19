@@ -1,4 +1,5 @@
 import express = require('express');
+import CurrencyService from "./services/currencyService";
 const config = require('./config'),
 routes = require('./api');
 
@@ -6,11 +7,13 @@ routes = require('./api');
 const app: express.Application = express();
 
 app.use('/api', routes);
-app.get('/', function (req, res) {
-  res.send('Hello World2!');
-});
+
 app.listen(config.port, function () {
-  console.log('Example app listening on port 3000!');
+  CurrencyService.getCurrencyList().then(() => {
+    console.log('Example app listening on port 3000!');
+  }).catch((error : any) => {
+    console.log(error);
+  })
 });
 
 /*
