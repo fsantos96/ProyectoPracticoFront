@@ -1,0 +1,23 @@
+@import "../common/variables";
+.main-container {
+    padding-left: 6em;
+    padding-right: 6em;
+}
+@media (max-width: 576px) { 
+    .main-container {
+        padding-left: 3em;
+        padding-right: 3em;
+    }
+}
+.breadcrumb-container {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    color: $gray-dark
+}
+.result-search-container {
+    color: $black;
+    height: 100%;
+    width: 100%;
+    background-color: white;
+    margin-bottom: 3em;
+}

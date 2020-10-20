@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './components/navbar/navBar';
 import {BrowserRouter as Router,Switch, Route} from "react-router-dom";
-import SearchResults from './components/searchResults/searchResult'
+import ListResults from './components/listResults/listResults'
 import './App.scss';
 
 class App extends React.Component {
@@ -15,7 +15,7 @@ class App extends React.Component {
           <Router>
             <Switch>
               {/* <Route exact path="/:search" component={SearchResults}></Route> */}
-              <Route exact path="/:search" component={SearchResults}></Route>
+              <Route exact path="/:search" component={ListResults}></Route>
             </Switch>
           </Router>
         </main>
