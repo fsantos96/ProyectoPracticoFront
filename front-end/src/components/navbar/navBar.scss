@@ -1,0 +1,64 @@
+@import "../common/variables";
+
+header {
+    height: 56px;
+    display: flex;
+    background-color: $yellow;
+}
+.nav-bar {
+    padding-left: 6em;
+    padding-right: 6em;
+}
+@media (max-width: 576px) { 
+    .nav-bar {
+        padding-left: 3em;
+        padding-right: 3em;
+    }
+}
+.nav-bar-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    .nav-bar-brand {
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 65px;
+        margin: auto;
+    }
+    .logo {
+        height: 36px;
+        background-repeat: no-repeat;
+        background-image: url("./Logo_ML.png");
+    }
+    .search-input-container {
+        width: 100%;
+        display: flex;
+        form {
+            display: flex;
+            width: 100%;
+            align-items: center;
+            padding: 8px 0px 8px 15px;
+        }
+    }
+}
+.search-input {
+    width: 90%;
+    padding: 7px;
+    border: 2px solid transparent;
+    &:focus {
+        outline: none !important;
+        box-shadow: 0 0 10px $gray;
+    }
+}
+.search-input-button {
+    height: 33px;
+    border:none;
+    background-color: $base-color;
+    border-left: 1px solid $base-color;
+    width: 32px;
+    div {
+        height: 16px;
+        background-image: url("./ic_Search.png");
+        background-repeat: no-repeat;
+    }
+}
