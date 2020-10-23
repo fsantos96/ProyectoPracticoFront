@@ -1,4 +1,4 @@
-@import "../common/variables";
+@import "../../variables.scss";
 
 header {
     height: 56px;
@@ -27,7 +27,7 @@ header {
     .logo {
         height: 36px;
         background-repeat: no-repeat;
-        background-image: url("./Logo_ML.png");
+        background-image: url("/Logo_ML.png");
     }
     .search-input-container {
         width: 100%;
@@ -61,7 +61,7 @@ header {
     div {
         height: 16px;
         margin-left: 2px;
-        background-image: url("./ic_Search.png");
+        background-image: url("/ic_Search.png");
         background-repeat: no-repeat;
     }
 }

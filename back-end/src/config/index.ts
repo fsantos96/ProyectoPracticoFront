@@ -1,5 +1,5 @@
 module.exports = {
-    port: 4040,
+    port: 4041,
     version: '1.0.0.0',
     authorization: {
     },

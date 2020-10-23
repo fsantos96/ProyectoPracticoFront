@@ -3,7 +3,7 @@ import {itemDto} from "./itemDto";
 
 export class itemDetailDto extends itemDto {
     sold_quantity: number;
-    description: string;
+    description: any;
 
     constructor(id: string, title: string, price: priceDto, picture: string, condition: string, free_shipping: string, sold_quantity : number, description: string) {
         super(id, title, price, picture, condition, free_shipping);

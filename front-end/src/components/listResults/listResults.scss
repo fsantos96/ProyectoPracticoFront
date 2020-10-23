@@ -1,23 +1,17 @@
 @import "../common/variables";
-.main-container {
-    padding-left: 6em;
-    padding-right: 6em;
-}
-@media (max-width: 576px) { 
-    .main-container {
-        padding-left: 3em;
-        padding-right: 3em;
-    }
-}
+@import "../common/container-routes.scss";
+
 .breadcrumb-container {
     padding-top: 16px;
     padding-bottom: 16px;
-    color: $gray-dark
+    color: $gray-dark 
 }
-.result-search-container {
-    color: $black;
-    height: 100%;
-    width: 100%;
-    background-color: white;
-    margin-bottom: 3em;
+
+.route-view-container {
+    a {
+        text-decoration: none !important;
+    }
+    a:focus, a:hover, a:visited{
+        color: $black;
+    }
 }

@@ -1,11 +1,24 @@
 import express = require('express');
+import cors from 'cors';
 import CurrencyService from "./services/currencyService";
 const config = require('./config'),
 routes = require('./api');
 
+const options: cors.CorsOptions = {
+  allowedHeaders: [
+    'Origin',
+    'X-Requested-With',
+    'Content-Type',
+    'Accept',
+    'X-Access-Token',
+  ],
+  methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+  preflightContinue: false,
+};
+
 // Create a new express application instance
 const app: express.Application = express();
-
+app.use(cors(options));
 app.use('/api', routes);
 
 app.listen(config.port, function () {
