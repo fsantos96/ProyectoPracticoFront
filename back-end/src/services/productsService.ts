@@ -33,6 +33,7 @@ function getItemsDetailById(id : string) {
                 data.shipping.free_shipping,
                 data.sold_quantity,
                 "",
+                [],
             );
             request.params = id + "/description";
             CurrencyService.getCurrencyList().then((response : any) => {
@@ -44,18 +45,39 @@ function getItemsDetailById(id : string) {
                 var symbol : string = currency ? currency.symbol : data.currency_id;
                 itemData.price.decimals = amountDecimals;
                 itemData.price.currency = symbol;
-                getItemsDescriptionById(request).then((description) => {
-                    itemData.description = description;
-                    resolve(itemData);
-                }).catch((error : any) => {
-                    resolve(itemData);
-                });
-            }).catch(() =>{
-                getItemsDescriptionById(request).then((description) => {
-                    itemData.description = description;
-                }).catch((error : any) => {
-                    resolve(itemData);
-                });
+                getCategoryDataById(data.category_id).then((categoryList : any) =>{
+                    itemData.categories = categoryList;
+                    getItemsDescriptionById(request).then((description) => {
+                        itemData.description = description;
+                        resolve(itemData);
+                    }).catch((error : any) => {
+                        resolve(itemData);
+                    });
+                }).catch((error:any) => {
+                    getItemsDescriptionById(request).then((description) => {
+                        itemData.description = description;
+                        resolve(itemData);
+                    }).catch((error : any) => {
+                        resolve(itemData);
+                    });
+                })
+            }).catch((error : any) =>{
+                getCategoryDataById(data.category_id).then((categoryList : any) =>{
+                    itemData.categories = categoryList;
+                    getItemsDescriptionById(request).then((description) => {
+                        itemData.description = description;
+                        resolve(itemData);
+                    }).catch((error : any) => {
+                        resolve(itemData);
+                    });
+                }).catch((error:any) => {
+                    getItemsDescriptionById(request).then((description) => {
+                        itemData.description = description;
+                        resolve(itemData);
+                    }).catch((error : any) => {
+                        resolve(itemData);
+                    });
+                })
             });
         }).catch((error : any) => {
             reject(error);

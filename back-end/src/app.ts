@@ -23,7 +23,7 @@ app.use('/api', routes);
 
 app.listen(config.port, function () {
   CurrencyService.getCurrencyList().then(() => {
-    console.log('Example app listening on port 3000!');
+    console.log('Example app listening on port' + config.port);
   }).catch((error : any) => {
     console.log(error);
   })

@@ -4,11 +4,13 @@ import Spinner from '../common/UI/spinner/spinner'
 import Breadcrumb from '../common/UI/breadcrumb/breadcrumb'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
+import Navbar from '../common/UI/navbar/navBar'
 import './listResults.scss';
 import { ApiUrl } from '../common/apiConfig';
 
 //Este componente fue creado como clase para usar el componentDidMount
 class ListResults extends React.Component<IListResultProps, IListResultState> {
+
   constructor(props : any) {
     super(props);
     this.state = {
@@ -19,19 +21,24 @@ class ListResults extends React.Component<IListResultProps, IListResultState> {
   }
 
   componentDidMount() {
-    const fetchItems = async () => {
-      let amountResult : number = 4
-      let searchText : string = this.props.location.search.split("search=")[1];
-      let url : string = ApiUrl + "items?searchText=" + searchText + "&amountResults=" + amountResult;
+    this.fetchItems()
+  }
 
-      const result = await axios(
-        url
-      )
-      this.props.setCategories(result.data.categories);
-      this.setState({isLoading: false, items: result.data.items, categories: result.data.categories });
-    }
+  fetchItems = async (value? : string) => {
+    let amountResult : number = 4
+    let searchText : string = value ? value : this.props.location.search.split("search=")[1];
+    let url : string = ApiUrl + "items?searchText=" + searchText + "&amountResults=" + amountResult;
 
-    fetchItems()
+    const result = await axios(
+      url
+    )
+
+    this.setState({isLoading: false, items: result.data.items, categories: result.data.categories });
+  }
+
+  handlerSubmit = (value : string) => {
+    this.setState({isLoading: true});
+    this.fetchItems(value);
   }
 
   renderCards = () => {
@@ -64,28 +71,44 @@ class ListResults extends React.Component<IListResultProps, IListResultState> {
 
   render() {
     let content;
-    if(this.state.isLoading) {
-      content = <Spinner></Spinner>
+
+    if(this.state.isLoading || !this.state.categories) {
+      content = (
+        <> 
+            <header className="nav-bar">
+                <Navbar></Navbar>
+            </header>
+            <main>
+              <Spinner></Spinner>
+            </main>
+        </>
+      )
+
     } else {
       content = (
-        <div className="main-container">
-          <div className="breadcrumb-container">
-            <Breadcrumb categories={this.state.categories}></Breadcrumb>
-          </div>
-          <div className="route-view-container">
-            {this.renderCards()}
-          </div>
-        </div>
-      );
+        <> 
+            <header className="nav-bar">
+                <Navbar submitSearch={this.handlerSubmit}></Navbar>
+            </header>
+            <main>
+              <div className="main-container">
+                <div className="breadcrumb-container">
+                  <Breadcrumb categories={this.state.categories}></Breadcrumb>
+                </div>
+                <div className="route-view-container">
+                  {this.renderCards()}
+                </div>
+              </div>
+            </main>
+        </>
+      )
     }
     return content;
   }
 }
 
 interface IListResultProps {
-  location?: any,
-  categories?: any,
-  setCategories: any
+  location?: any
 }
 
 interface IListResultState {
